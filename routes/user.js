@@ -49,10 +49,47 @@ router.post('/login', (req, res, next) => {
     const token = jwt.sign({ user: user }, 'secret', { expiresIn: 7200 });
     res.status(200).json({
       message: 'Successfully Logged In',
-      token: token,
-      userId: user._id
+      token  : token,
+      userId : user._id
     });
   });
+});
+
+router.post('/retrievepassword', (req, res, next) => {
+  User.findOne({ email: req.body.email }, (err, user) => {
+    if(err) {
+      return res.status(500).json({
+        title: 'An error occurred',
+        error: err
+      })
+    }
+    if(!user) {
+      return res.status(401).json({
+        title: 'Invalid email',
+        error: { message: 'Invalid email' }
+      });
+    }
+    res.status(200).json({
+      title : 'Retrieve Password successfully',
+      password: user.password
+    })
+  });
+});
+
+router.get('/user-profile', (req, res, next) => {
+  User.find()
+    .exec((err, data) => {
+      if(err) {
+        return res.status(500).json({
+          title: 'An error occurred',
+          error: err
+        })
+      }
+      res.status(200).json({
+        message: 'Success',
+        user   : data
+      });
+    });
 });
 
 module.exports = router;
