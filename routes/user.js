@@ -9,7 +9,7 @@ router.post('/', (req, res, next) => {
   var user = new User({
     firstName: req.body.firstName,
     lastName : req.body.lastName,
-    password : bcrypt.hashSync(req.body.password, 10),
+    password : bcrypt.hashSync(req.body.password, 8),
     email    : req.body.email
   });
   user.save((err, result) => {
@@ -77,19 +77,24 @@ router.post('/retrievepassword', (req, res, next) => {
 });
 
 router.get('/user-profile', (req, res, next) => {
-  User.find()
-    .exec((err, data) => {
-      if(err) {
-        return res.status(500).json({
-          title: 'An error occurred',
-          error: err
-        })
-      }
-      res.status(200).json({
-        message: 'Success',
-        user   : data
-      });
-    });
+  const decoded = jwt.decode(req.query.token);
+  User.findById( decoded.user._id , (err, user) => {
+    if(err) {
+      return res.status(500).json({
+        title: 'An error occurred',
+        error: err
+      })
+    }
+    res.status(200).json({
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      address: user.address,
+      city: user.city,
+      state: user.state,
+      zipcode: user.zipcode
+    })
+  });
 });
 
 module.exports = router;
