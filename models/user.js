@@ -3,14 +3,14 @@ let Schema = mongoose.Schema;
 let mongooseUniqueValidator = require('mongoose-unique-validator');
 
 let schema = new Schema({
-  firstName: { type: String, required: true },
-  lastName : { type: String, required: true },
-  password : { type: String, required: true },
-  address  : { type: String },
-  city  : { type: String },
-  zipcode  : { type: String },
-  state  : { type: String },
-  email    : { type: String, required: true, unique: true }
+  firstName: { type: String || null, required: true },
+  lastName : { type: String || null, required: true },
+  password : { type: String || null, required: true },
+  address  : { type: String || null },
+  city  : { type: String || null },
+  zipcode  : { type: String || null },
+  state  : { type: String || null },
+  email    : { type: String || null, required: true, unique: true }
 });
 
 schema.plugin(mongooseUniqueValidator);

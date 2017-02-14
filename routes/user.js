@@ -83,6 +83,12 @@ router.get('/user-profile', (req, res, next) => {
       return res.status(500).json({
         title: 'An error occurred',
         error: err
+      });
+    }
+    if(!user) {
+      return res.status(500).json({
+        title: 'User was not found',
+        error: err
       })
     }
     res.status(200).json({
@@ -93,7 +99,45 @@ router.get('/user-profile', (req, res, next) => {
       city: user.city,
       state: user.state,
       zipcode: user.zipcode
-    })
+    });
+  });
+});
+
+router.patch('/user-profile/update', (req, res, next) => {
+  var decoded = jwt.decode(req.query.token);
+  User.findById( decoded.user._id, (err, user) => {
+    if(err) {
+      return res.status(500).json({
+        title: 'An error occurred',
+        error: err
+      })
+    }
+    if(!user) {
+      return res.status(500).json({
+        title: 'User was not found',
+        error: err
+      })
+    }
+    user.firstName = req.body.firstName;
+    user.lastName = req.body.lastName;
+    user.address = req.body.address;
+    user.city =  req.body.city;
+    user.state = req.body.state;
+    user.zipcode = req.body.zipcode;
+    user.email = req.body.zipcode;
+
+    user.save((err, result) => {
+      if(err) {
+        return res.status(500).json({
+          title: 'An error occurred',
+          error: err
+        });
+      }
+      res.status(200).json({
+        message: 'User has been updated',
+        user : result
+      })
+    });
   });
 });
 
