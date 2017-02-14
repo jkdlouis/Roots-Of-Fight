@@ -17,14 +17,14 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.listen(3000, '127.0.0.1', function() {
-  console.log('Listening to port:127.0.0.1:' + 3000 );
+  console.log('Listening to port:127.0.0.1:' + 3000);
 });
 
 //app.listen(port);
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 //app.use(express.static(path.join(__dirname, 'public')));
 
@@ -40,7 +40,7 @@ app.use('/user', userRoutes);
 app.use('/', appRoutes);
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
   return res.render('index');
 });
 

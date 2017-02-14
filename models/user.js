@@ -7,9 +7,9 @@ let schema = new Schema({
   lastName : { type: String || null, required: true },
   password : { type: String || null, required: true },
   address  : { type: String || null },
-  city  : { type: String || null },
+  city     : { type: String || null },
   zipcode  : { type: String || null },
-  state  : { type: String || null },
+  state    : { type: String || null },
   email    : { type: String || null, required: true, unique: true }
 });
 

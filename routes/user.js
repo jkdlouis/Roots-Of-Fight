@@ -70,7 +70,7 @@ router.post('/retrievepassword', (req, res, next) => {
       });
     }
     res.status(200).json({
-      title : 'Retrieve Password successfully',
+      title   : 'Retrieve Password successfully',
       password: user.password
     })
   });
@@ -78,7 +78,7 @@ router.post('/retrievepassword', (req, res, next) => {
 
 router.get('/user-profile', (req, res, next) => {
   const decoded = jwt.decode(req.query.token);
-  User.findById( decoded.user._id , (err, user) => {
+  User.findById(decoded.user._id, (err, user) => {
     if(err) {
       return res.status(500).json({
         title: 'An error occurred',
@@ -93,52 +93,52 @@ router.get('/user-profile', (req, res, next) => {
     }
     res.status(200).json({
       firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      address: user.address,
-      city: user.city,
-      state: user.state,
-      zipcode: user.zipcode
+      lastName : user.lastName,
+      email    : user.email,
+      address  : user.address,
+      city     : user.city,
+      state    : user.state,
+      zipcode  : user.zipcode
     });
   });
 });
 
-router.patch('/user-profile/update', (req, res, next) => {
-  var decoded = jwt.decode(req.query.token);
-  User.findById( decoded.user._id, (err, user) => {
-    if(err) {
-      return res.status(500).json({
-        title: 'An error occurred',
-        error: err
-      })
-    }
-    if(!user) {
-      return res.status(500).json({
-        title: 'User was not found',
-        error: err
-      })
-    }
-    user.firstName = req.body.firstName;
-    user.lastName = req.body.lastName;
-    user.address = req.body.address;
-    user.city =  req.body.city;
-    user.state = req.body.state;
-    user.zipcode = req.body.zipcode;
-    user.email = req.body.zipcode;
-
-    user.save((err, result) => {
-      if(err) {
-        return res.status(500).json({
-          title: 'An error occurred',
-          error: err
-        });
-      }
-      res.status(200).json({
-        message: 'User has been updated',
-        user : result
-      })
-    });
-  });
-});
+//router.patch('/user-profile/update', (req, res, next) => {
+//  var decoded = jwt.decode(req.query.token);
+//  User.findById( decoded.user._id, (err, user) => {
+//    if(err) {
+//      return res.status(500).json({
+//        title: 'An error occurred',
+//        error: err
+//      })
+//    }
+//    if(!user) {
+//      return res.status(500).json({
+//        title: 'User was not found',
+//        error: err
+//      })
+//    }
+//    user.firstName = req.body.firstName;
+//    user.lastName = req.body.lastName;
+//    user.address = req.body.address;
+//    user.city =  req.body.city;
+//    user.state = req.body.state;
+//    user.zipcode = req.body.zipcode;
+//    user.email = req.body.email;
+//
+//    user.save((err, result) => {
+//      if(err) {
+//        return res.status(500).json({
+//          title: 'An error occurred',
+//          error: err
+//        });
+//      }
+//      res.status(200).json({
+//        message: 'User has been updated',
+//        user : result
+//      })
+//    });
+//  });
+//});
 
 module.exports = router;
