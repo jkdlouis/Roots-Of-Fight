@@ -1,9 +1,9 @@
-let express = require('express');
-let router = express.Router();
-let bcrypt = require('bcryptjs');
-let jwt = require('jsonwebtoken');
+const express = require('express');
+const router = express.Router();
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
-let User = require('../models/user');
+const User = require('../models/user');
 
 router.post('/', (req, res, next) => {
   var user = new User({

@@ -1,15 +1,15 @@
-let express = require('express');
-let path = require('path');
-let logger = require('morgan');
-let cookieParser = require('cookie-parser');
-let bodyParser = require('body-parser');
-let mongoose = require('mongoose');
+const express = require('express');
+const path = require('path');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 //let port = process.env.PORT || 3000;
 
-let appRoutes = require('./routes/app');
-let userRoutes = require('./routes/user');
+const appRoutes = require('./routes/app');
+const userRoutes = require('./routes/user');
 
-let app = express();
+const app = express();
 mongoose.connect('127.0.0.1:27017/ssm');
 
 //view engine setup

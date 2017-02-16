@@ -1,6 +1,6 @@
-let mongoose = require('mongoose');
-let Schema = mongoose.Schema;
-let mongooseUniqueValidator = require('mongoose-unique-validator');
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const mongooseUniqueValidator = require('mongoose-unique-validator');
 
 let schema = new Schema({
   firstName: { type: String || null, required: true },
