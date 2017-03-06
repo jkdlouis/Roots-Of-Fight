@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
 router.post('/', (req, res, next) => {
-  var user = new User({
+  const user = new User({
     firstName: req.body.firstName,
     lastName : req.body.lastName,
     password : bcrypt.hashSync(req.body.password, 8),
@@ -91,7 +91,8 @@ router.get('/user-profile', (req, res, next) => {
         error: err
       })
     }
-    res.status(200).json({
+    res.status(200).json(
+      {
       firstName: user.firstName,
       lastName : user.lastName,
       email    : user.email,
@@ -103,42 +104,47 @@ router.get('/user-profile', (req, res, next) => {
   });
 });
 
-//router.patch('/user-profile/update', (req, res, next) => {
-//  var decoded = jwt.decode(req.query.token);
-//  User.findById( decoded.user._id, (err, user) => {
-//    if(err) {
-//      return res.status(500).json({
-//        title: 'An error occurred',
-//        error: err
-//      })
-//    }
-//    if(!user) {
-//      return res.status(500).json({
-//        title: 'User was not found',
-//        error: err
-//      })
-//    }
-//    user.firstName = req.body.firstName;
-//    user.lastName = req.body.lastName;
-//    user.address = req.body.address;
-//    user.city =  req.body.city;
-//    user.state = req.body.state;
-//    user.zipcode = req.body.zipcode;
-//    user.email = req.body.email;
-//
-//    user.save((err, result) => {
-//      if(err) {
-//        return res.status(500).json({
-//          title: 'An error occurred',
-//          error: err
-//        });
-//      }
-//      res.status(200).json({
-//        message: 'User has been updated',
-//        user : result
-//      })
-//    });
-//  });
-//});
+router.put('/user-profile/update', (req, res, next) => {
+  const decoded = jwt.decode(req.query.token);
+  User.findById(decoded.user._id, (err, user) => {
+    if(err) {
+      return res.status(500).json(
+        {
+        title: 'An error occurred',
+        error: err
+      })
+    }
+    if(!user) {
+      return res.status(500).json(
+      {
+        title: 'User was not found',
+        error: err
+      })
+    }
+    user.firstName = req.body.firstName;
+    user.lastName = req.body.lastName;
+    user.address = req.body.address;
+    user.city =  req.body.city;
+    user.state = req.body.state;
+    user.zipcode = req.body.zipcode;
+    user.email = req.body.email;
+
+    user.save((err, result) => {
+      if(err) {
+        console.log(req.body);
+        console.log(134);
+        return res.status(500).json({
+          title: 'An error occurred',
+          error: err
+        });
+      }
+      res.status(200).json(
+        {
+        message: 'User has been updated',
+        user : result
+      })
+    });
+  });
+});
 
 module.exports = router;
