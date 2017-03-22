@@ -10,6 +10,7 @@ const mongoose = require('mongoose');
 
 const appRoutes = require('./routes/routes');
 const userRoutes = require('./routes/user');
+const productRoutes = require('./routes/product');
 
 const app = express();
 mongoose.connect('127.0.0.1:27017/ssm');
@@ -38,6 +39,7 @@ app.use((req, res, next) => {
 });
 
 //ng2 routes set here
+app.use('/product', productRoutes);
 app.use('/user', userRoutes);
 app.use('/', appRoutes);
 
