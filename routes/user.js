@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-const User = require('../models/user');
+const User = require('../models/user.model');
 
 router.post('/', (req, res, next) => {
   const user = new User({
@@ -131,8 +131,6 @@ router.put('/user-profile/update', (req, res, next) => {
 
     user.save((err, result) => {
       if(err) {
-        console.log(req.body);
-        console.log(134);
         return res.status(500).json({
           title: 'An error occurred',
           error: err
