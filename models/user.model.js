@@ -10,7 +10,11 @@ let schema = new Schema({
   city     : { type: String || null },
   zipcode  : { type: String || null },
   state    : { type: String || null },
-  email    : { type: String || null, required: true, unique: true }
+  email    : { type: String || null, required: true, unique: true },
+  birthMonth : { type: String || null },
+  birthDate : { type: Number || null },
+  birthYear : { type: Number || null},
+  favorMartialArt : { type: String || null}
 });
 
 schema.plugin(mongooseUniqueValidator);
