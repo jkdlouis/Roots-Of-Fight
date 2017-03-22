@@ -1,3 +1,5 @@
+'use strict';
+
 const express = require('express');
 const path = require('path');
 const logger = require('morgan');
@@ -6,7 +8,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 //let port = process.env.PORT || 3000;
 
-const appRoutes = require('./routes/app');
+const appRoutes = require('./routes/routes');
 const userRoutes = require('./routes/user');
 
 const app = express();
