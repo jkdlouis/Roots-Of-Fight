@@ -6,21 +6,21 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-//let port = process.env.PORT || 3000;
+let port = process.env.PORT || 3000;
 
 const appRoutes = require('./routes/routes');
 const userRoutes = require('./routes/user');
 const productRoutes = require('./routes/product');
 
 const app = express();
-mongoose.connect('127.0.0.1:27017/ssm');
+mongoose.connect('localhost:27017/ssm');
 
 //view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.listen(3000, '127.0.0.1', function() {
-  console.log('Listening to port:127.0.0.1:' + 3000);
+app.listen(port, function() {
+  console.log('Listening to port:' + 3000);
 });
 
 //app.listen(port);
