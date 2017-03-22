@@ -14,7 +14,8 @@ let schema = new Schema({
   birthMonth : { type: String || null },
   birthDate : { type: Number || null },
   birthYear : { type: Number || null},
-  favorMartialArt : { type: String || null}
+  favorMartialArt : { type: String || null},
+  product : [{ type: Schema.Types.ObjectId, ref: 'Product'}]
 });
 
 schema.plugin(mongooseUniqueValidator);
