@@ -1,5 +1,6 @@
 {
   "name": "style-separates-man",
+  "author": "Louis Huang",
   "version": "1.0.0",
   "description": "eCommerce for clothing",
   "main": "index.js",
